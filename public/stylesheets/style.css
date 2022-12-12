@@ -132,6 +132,7 @@ footer {
     display: flex;
     flex-direction: column;
     padding: 30px;
+    gap:20px;
 }
 
 .beerContainer {
