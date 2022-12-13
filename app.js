@@ -38,15 +38,25 @@ app.get('/random-beer', (req, res) => {
     .catch(error => console.log(error));
 });
 
-punkAPI
+// static solution for every beer, but if we have a million beers, it won't work
+/* punkAPI
   .getBeers()
   .then(beers =>
     beers.map(beer => {
-      app.get('/beers/beer-' + beer.id, (req, res) => {
+      app.get('/beers/' + beer.id, (req, res) => {
         res.render('random-beer', beer);
       });
     })
   )
-  .catch(error => console.log(error));
+  .catch(error => console.log(error)); */
+
+// dynamic solution. 
+
+app.get("/beers/:id", (req,res)=>{
+  punkAPI
+    .getBeer(req.params.id)
+    .then(beer => res.render('random-beer', beer[0]))
+    .catch(error => console.log(error));
+})
 
 app.listen(3000, () => console.log('🏃‍ on port 3000'));
